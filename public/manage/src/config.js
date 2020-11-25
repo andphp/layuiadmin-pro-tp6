@@ -83,6 +83,7 @@ layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
       },{
         main: '#2E241B'
         ,logo: 'transparent'
+        ,btn: '#A48566'
         ,selected: '#A48566'
         ,alias: 'coffee' //咖啡
       },{

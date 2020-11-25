@@ -233,6 +233,14 @@ layui.define('view', function(exports){
           ,'.layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar{background-color: #fff; background-color: rgba(255,255,255,.5);}'
           ,'.layadmin-pagetabs .layui-tab-title li:after{display: none;}'
         ,'{{# } }}'
+
+        ,'{{# if(d.color.btn){ }}'
+        ,'.layui-btn, .layui-progress-bar, .layui-laypage-em, .layui-laydate .layui-this {background-color: {{ d.color.btn }} !important;}'
+        ,'.layui-timeline-axis, .layui-upload-drag .layui-icon, .layui-form-radio>i:hover, .layui-form-radioed>i {color: {{ d.color.btn }} !important;}'
+        ,'.layui-elem-quote {border-left: 5px solid {{ d.color.btn }} !important;}'
+        ,'.layui-tab-brief>.layui-tab-title .layui-this:after {border-bottom: 2px solid {{ d.color.btn }} !important;}'
+        ,'.layui-form-onswitch, .layui-form-checked[lay-skin=primary] i {border-color: {{ d.color.btn }} !important; background-color:  {{ d.color.btn }} !important;}'
+        ,'{{# } }}'
       ].join('')).render(options = $.extend({}, local.theme, options))
       ,styleElem = document.getElementById(id);
       

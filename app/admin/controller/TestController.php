@@ -18,7 +18,7 @@ class TestController extends AdminController
      */
     public function index()
     {
-        $menu = (new ManageConfigs())->select();
+        $menu = (new ManagePermissions())->select();
         echo "<pre>";
         var_export($menu->toArray());exit;
         return $this->success($menu->toArray());

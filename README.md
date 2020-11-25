@@ -2,10 +2,13 @@
 layuiadmin v1.4.0 pro + thinkphp6.0.4
 
 ### 效果图
-![登录页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame1.png?raw=true)
-![登录成功](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame2.png?raw=true)
-![欢迎页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame4.png?raw=true)
-![菜单权限页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame3.png?raw=true)
+![登录页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme1.png?raw=true)
+![登录成功](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme2.png?raw=true)
+![欢迎页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme3.png?raw=true)
+![菜单权限页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme4.png?raw=true)
+![切换主题](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme5.png?raw=true)
+![切换主题](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme6.png?raw=true)
+![切换主题](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme7.png?raw=true)
 ### 下载
 
 ```
