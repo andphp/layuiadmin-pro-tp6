@@ -1,0 +1,120 @@
+<script>
+    var xmParams;
+</script>
+
+<div class="layui-form layui-form-pane" lay-filter="permission-roles-add-or-edit">
+  <div class="layui-form-item">
+    <label class="layui-form-label">角色名称</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="role_name" value="{{ d.params.role_name || '' }}" placeholder="请输入角色名称" autocomplete="off" class="layui-input" lay-verify="required" lay-reqText="角色名称 必填！">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">英文标识</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="identify" value="{{ d.params.identify || '' }}" placeholder="请输入英文标识" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+          <script type="text/html" template>
+              <input type="radio" name="status" value="1" title="正常" {{ d.params.status !== 2 ? 'checked' : '' }}>
+              <input type="radio" name="status" value="2" title="禁用" {{ d.params.status === 2 ? 'checked' : '' }}>
+          </script>
+        </div>
+    </div>
+  <div class="layui-form-item" pane>
+    <label class="layui-form-label">权限范围</label>
+        <script type="text/html" template lay-done="xmParams = d.params;">
+            <input type="hidden" name="id" value="{{ d.params.id || '' }}"  class="layui-input">
+        </script>
+        <div class="layui-input-block" id="rulesTreeSelect"></div>
+  </div>
+  <div class="layui-form-item" pane>
+    <label class="layui-form-label">具体描述</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <textarea type="text" name="description" lay-verify="required" autocomplete="off" class="layui-textarea">{{ d.params.description || '' }}</textarea>
+      </script>
+    </div>
+  </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block buttonCenter">
+            <button class="layui-btn" lay-submit lay-filter="LAY-permission-roles-submit">立即提交</button>
+        </div>
+    </div>
+</div>
+
+<script>
+layui.use(['admin', 'form','xmSelect'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,form = layui.form;
+  var xm = xmSelect.render({
+    el: '#rulesTreeSelect',
+    name: 'permissions',
+    tree: {
+      //是否显示树状结构
+      show: true,
+      //是否展示三角图标
+      showFolderIcon: true,
+      //是否显示虚线
+      showLine: true,
+      //间距
+      indent: 20,
+      //默认展开节点的数组, 为 true 时, 展开所有节点
+      expandedKeys: [],
+      //是否严格遵守父子模式
+      strict: false,
+      //是否开启极简模式
+      simple: false,
+    },
+    filterable: true,
+    autoRow: true,
+    theme: {
+      color: '#5EABE1',
+    },
+    layVerify: 'required',
+    layVerType: 'msg',
+    tips:'请选择权限',
+    template({ item, sels, name, value }){
+      return item.name  + '<span style="position: absolute; right: 10px; color: #8799a3">'+value+'</span>'
+    },
+    prop: {
+      name: 'show_name',
+    },
+    model: {
+      label: {
+        type: 'block',
+        block: {
+          //最大显示数量, 0:不限制
+          showCount: 20,
+          //是否显示删除图标
+          showIcon: true,
+        }
+      }
+    },
+    data: [],
+  });
+
+  admin.req({
+    url: '/menu/select_adopt'
+    ,type: 'get'
+    ,done: function(res){
+      xm.update({
+        data: res.data,
+        autoRow: true,
+      });
+      if(!$.isEmptyObject(xmParams)){
+        xm.setValue(xmParams.permissions.split(','),true)
+      }
+    }
+  });
+
+});
+</script>

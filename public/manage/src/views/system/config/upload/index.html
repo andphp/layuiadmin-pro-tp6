@@ -1,0 +1,222 @@
+<title>上传配置</title>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">上传配置</div>
+                <div class="layui-card-body">
+                    <div class="layui-form" wid100 lay-filter="upload-form">
+                        <script type="text/html" template lay-url="/config/group?group=upload"
+                                lay-done="layui.data.done(d);">
+                            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                                <legend>文件存储方式</legend>
+                            </fieldset>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">存储方式</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="id[{{ d.data.storage.id }}]" lay-filter="radio_storage"
+                                           value="0" title="本地" {{ d.data.storage.value=== '0' ? 'checked' : '' }} >
+                                    <input type="radio" name="id[{{ d.data.storage.id }}]" lay-filter="radio_storage"
+                                           value="1" title="阿里云OSS" {{ d.data.storage.value=== '1' ? 'checked' : '' }} >
+                                    <input type="radio" name="id[{{ d.data.storage.id }}]" lay-filter="radio_storage"
+                                           value="2" title="七牛云" {{ d.data.storage.value=== '2' ? 'checked' : '' }} >
+                                </div>
+                            </div>
+                            <!--aliyun oss-->
+                            <div class="layui-form-item storage_setting storage_1" {{ d.data.storage.value !== 1?'style="display:none;"':'style="display:block;"' }} >
+                                <label class="layui-form-label">AccessKey</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="id[{{ d.data.oss_ak.id }}]"
+                                           value="{{ d.data.oss_ak.value || '' }}" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item storage_setting storage_1" {{ d.data.storage.value !==
+                                 1?'style="display:none;"':'style="display:block;"' }} >
+                            <label class="layui-form-label">AccessKeySecret</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id[{{ d.data.oss_sk.id }}]"
+                                       value="{{ d.data.oss_sk.value || '' }}" class="layui-input">
+                            </div>
+                            </div>
+                            <div class="layui-form-item storage_setting storage_1" {{ d.data.storage.value !==
+                                 1?'style="display:none;"':'style="display:block;"' }} >
+                            <label class="layui-form-label">Endpoint</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id[{{ d.data.oss_endpoint.id }}]"
+                                       value="{{ d.data.oss_endpoint.value || '' }}" class="layui-input">
+                            </div>
+                            </div>
+                            <div class="layui-form-item storage_setting storage_1" {{ d.data.storage.value !==
+                                 1?'style="display:none;"':'style="display:block;"' }} >
+                            <label class="layui-form-label">Bucket</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id[{{ d.data.oss_bucket.id }}]"
+                                       value="{{ d.data.oss_bucket.value || '' }}" class="layui-input">
+                            </div>
+                            </div>
+                            <!--qiniu oss-->
+                            <div class="layui-form-item storage_setting storage_2" {{ d.data.storage.value !==
+                                 2?'style="display:none;"':'style="display:block;"' }} >
+                            <label class="layui-form-label">AccessKey</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id[{{ d.data.qiniu_ak.id }}]"
+                                       value="{{ d.data.qiniu_ak.value || '' }}" class="layui-input">
+                            </div>
+                            </div>
+                            <div class="layui-form-item storage_setting storage_2" {{ d.data.storage.value !==
+                                 2?'style="display:none;"':'style="display:block;"' }} >
+                            <label class="layui-form-label">AccessKeySecret</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id[{{ d.data.qiniu_sk.id }}]"
+                                       value="{{ d.data.qiniu_sk.value || '' }}" class="layui-input">
+                            </div>
+                            </div>
+                            <div class="layui-form-item storage_setting storage_2" {{ d.data.storage.value !==
+                                 2?'style="display:none;"':'style="display:block;"' }} >
+                            <label class="layui-form-label">域名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id[{{ d.data.qiniu_domain.id }}]"
+                                       value="{{ d.data.qiniu_domain.value || '' }}"
+                                       class="layui-input">
+                            </div>
+                            </div>
+                            <div class="layui-form-item storage_setting storage_2" {{ d.data.storage.value !==
+                                 2?'style="display:none;"':'style="display:block;"' }} >
+                            <label class="layui-form-label">Bucket</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id[{{ d.data.qiniu_bucket.id }}]"
+                                       value="{{ d.data.qiniu_bucket.value || '' }}"
+                                       class="layui-input">
+                            </div>
+                            </div>
+                            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                                <legend>图片处理</legend>
+                            </fieldset>
+                            <!--<div class="layui-form-item">
+                                <label class="layui-form-label">生成缩略图</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="thumb" value="{$data.thumb}" class="layui-input" placeholder="例如：200,200 多个缩略图用“|”号隔开，不生成请留空">
+                                </div>
+                            </div>
+                            <hr>-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">图片水印</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox"
+                                           lay-filter="waterImgSwitch"
+                                           lay-skin="switch"
+                                           lay-text="开启|关闭" {{ d.data.water_img_switch.value === '1' ? 'checked' : '' }}
+                                    >
+                                    <input id="waterImgSwitchID" type="hidden" name="id[{{ d.data.water_img_switch.id }}]" value="{{ d.data.water_img_switch.value || '0' }}" >
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">水印文件路径</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="id[{{ d.data.water_img.id }}]"
+                                           value="{{ d.data.water_img.value || '' }}" class="layui-input">
+                                    <div class="layui-form-mid layui-word-aux">不能是网络图片</div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" pane>
+                                <label class="layui-form-label">水印位置</label>
+                                <div class="layui-input-inline">
+                                    <select name="id[{{ d.data.water_locate.id }}]">
+                                        <option value="1" {{ d.data.water_img_switch.value===
+                                        '1' ? 'selected' : '' }} >左上角</option>
+                                        <option value="2" {{ d.data.water_img_switch.value===
+                                        '2' ? 'selected' : '' }} >上居中</option>
+                                        <option value="3" {{ d.data.water_img_switch.value===
+                                        '3' ? 'selected' : '' }} >右上角</option>
+                                        <option value="4" {{ d.data.water_img_switch.value===
+                                        '4' ? 'selected' : '' }} >左居中</option>
+                                        <option value="5" {{ d.data.water_img_switch.value===
+                                        '5' ? 'selected' : '' }} >居中</option>
+                                        <option value="6" {{ d.data.water_img_switch.value===
+                                        '6' ? 'selected' : '' }} >右居中</option>
+                                        <option value="7" {{ d.data.water_img_switch.value===
+                                        '7' ? 'selected' : '' }} >左下角</option>
+                                        <option value="8" {{ d.data.water_img_switch.value===
+                                        '8' ? 'selected' : '' }} >下居中</option>
+                                        <option value="9" {{ d.data.water_img_switch.value===
+                                        '9' ? 'selected' : '' }} >右下角</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">透明度</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="id[{{ d.data.water_alpha.id }}]"
+                                           value="{{ d.data.water_alpha.value || '' }}" autocomplete="off"
+                                           class="layui-input number" placeholder="">
+                                </div>
+                                <div class="layui-form-mid layui-word-aux">0~100，数字越小，透明度越高</div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit="" lay-filter="set_website">确认保存</button>
+                                </div>
+                            </div>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  layui.use(['admin', 'form'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , form = layui.form;
+
+    //监听多选框 点击触发事件
+    form.on('switch(waterImgSwitch)', function(data){
+       let isSwitch = this.checked ? '1':'0';
+      $('#waterImgSwitchID').val(isSwitch);
+      form.render();
+    });
+
+    form.on('radio(radio_storage)', function (data) {
+      switch (data.value) {
+        case '1':
+          $(".storage_1").show();
+          $(".storage_2").hide();
+          break;
+        case '2':
+          $(".storage_2").show();
+          $(".storage_1").hide();
+          break;
+        default:
+          $(".storage_1").hide();
+          $(".storage_2").hide();
+          break;
+      };
+      form.render();
+    });
+
+    //监听提交
+    form.on('submit(set_website)', function (data) {
+      var field = data.field; //获取提交的字段
+      //提交 Ajax 成功后，关闭当前弹层并重载表格
+      admin.req({
+        url: '/config/update_batch'
+        , type: 'post'
+        , data: field
+        , done: function (res) {
+          layer.msg(res.msg);
+        }
+      });
+      layer.close(); //执行关闭
+    });
+    form.render();
+  });
+
+  layui.data.done = function(d){
+    layui.use(['form'], function(){
+      var form = layui.form;
+      form.render(null, 'upload-form'); //渲染该模板下的动态表单
+    });
+  };
+</script>

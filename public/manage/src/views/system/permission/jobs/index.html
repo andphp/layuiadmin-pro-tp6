@@ -1,0 +1,124 @@
+
+
+<title>岗位管理</title>
+
+<div class="layui-card layadmin-header">
+    <div class="layui-breadcrumb" lay-filter="breadcrumb">
+        <a lay-href="">主页</a>
+        <a><cite>用户</cite></a>
+        <a><cite>岗位管理</cite></a>
+    </div>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <div class="layui-btn-container" style="display: inline-block;">
+                <div class="layui-btn-group">
+                    <button id="btnAdd" class="layui-btn layui-btn-sm layui-btn-primary permission-jobs-btn" data-type="add">
+                        <i class="layui-icon">&#xe624;</i>新增
+                    </button>
+                    <button id="btnRefresh" class="layui-btn layui-btn-sm layui-btn-primary permission-jobs-btn" data-type="refresh">
+                        <i class="layui-icon">&#xe669;</i>刷新
+                    </button>
+                </div>
+            </div>
+            <div style="float:right;">
+                <input class="layui-input" id="edtSearch" value="" placeholder="输入关键字"
+                       style="display: inline-block;width: 140px;height: 30px;line-height: 30px;padding: 0 5px;margin-right: 5px;"/>
+                <div class="layui-btn-container" style="display: inline-block;">
+                    <button id="btnSearch" class="layui-btn layui-btn-sm layui-btn-primary">
+                        <i class="layui-icon">&#xe615;</i>搜索
+                    </button>
+                    <button id="btnClearSearch" class="layui-btn layui-btn-sm layui-btn-primary">
+                        <i class="layui-icon">&#x1006;</i>清除搜索
+                    </button>
+                </div>
+            </div>
+
+            <table id="LAY-table-permission-job" lay-filter="LAY-table-permission-job"></table>
+            <script type="text/html" id="LAY-table-toolbar-jobs">
+                <div class="layui-btn-container layui-btn-group">
+                    <button class="layui-btn layui-btn-sm" lay-event="batchDelete"><i class="layui-icon">&#xe640;</i>删除</button>
+                    <button class="layui-btn layui-btn-sm" lay-event="batchDisable"><i class="layui-icon">&#xe682;</i>禁用</button>
+                    <button class="layui-btn layui-btn-sm" lay-event="batchEnable"><i class="layui-icon">&#xe666;</i>启用</button>
+                </div>
+            </script>
+            <script type="text/html" id="statusTpl">
+                {{#  if(d.status === 1){ }}
+                <button class="layui-btn layui-btn-xs">正常</button>
+                {{#  } else { }}
+                <button class="layui-btn layui-btn-primary layui-btn-xs">禁用</button>
+                {{#  } }}
+            </script>
+            <script type="text/html" id="LAY-table-tool-jobs">
+                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+            </script>
+        </div>
+    </div>
+</div>
+
+<script>
+  layui.use('job', layui.factory('job')).use(['admin', 'job', 'table'], function(){
+    var $ = layui.$
+      ,admin = layui.admin
+      ,view = layui.view
+      ,table = layui.table
+      ,job = layui.job
+      ,form = layui.form;
+
+    form.render(null, 'LAY-table-permission-job');
+
+
+    //事件
+    var active = {
+      refresh: function(){
+        job.jobTable.reload();
+      },
+      add: function(){
+        admin.popup({
+          title: '添加新角色'
+          ,area: ['600px', '680px']
+          ,id: 'LAY-popup-permission-jobs-form'
+          ,success: function(layero, index){
+            view(this.id).render('system/permission/jobs/add_or_edit').done(function(){
+              form.render(null, 'permission-jobs-add-or-edit');
+              //监听提交
+              form.on('submit(LAY-permission-jobs-submit)', function(data){
+                var field = data.field; //获取提交的字段
+                //提交 Ajax 成功后，关闭当前弹层并重载表格
+                admin.req({
+                  url: '/job/save'
+                  ,type: 'post'
+                  ,data: field
+                  ,done: function(res){
+                    layer.msg(res.msg);
+                    layui.table.reload('LAY-table-permission-job'); //重载表格
+                  }
+                });
+                layui.table.reload('LAY-table-permission-job'); //重载表格
+                layer.close(index); //执行关闭
+              });
+            });
+          }
+        });
+      }
+    };
+    $('.layui-btn.permission-jobs-btn').on('click', function(){
+      var type = $(this).data('type');
+      active[type] ? active[type].call(this) : '';
+    });
+
+    //鼠标悬停提示
+    $("#edtSearch").hover(function() {
+      openMsg();
+    }, function() {
+      layer.close(edtSearchTips);
+    });
+    function openMsg() {
+      edtSearchTips = layer.tips('关键词如:岗位名称', '#edtSearch',{tips:[4,'#3595CC'],time: 10000});
+    }
+    //END 鼠标悬停提示
+  });
+</script>

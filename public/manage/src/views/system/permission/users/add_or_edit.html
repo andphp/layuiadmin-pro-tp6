@@ -1,0 +1,193 @@
+<script>
+    var xmParams;
+</script>
+
+<div class="layui-form layui-form-pane" lay-filter="permission-users-add-or-edit">
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="username" value="{{ d.params.username || '' }}" placeholder="请输入用户名称" autocomplete="off" class="layui-input" lay-verify="required|nickname" >
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">电子邮箱</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="email" value="{{ d.params.email || '' }}" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input" lay-verify="email">
+      </script>
+    </div>
+  </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+          <script type="text/html" template>
+              <input type="radio" name="status" value="1" title="正常" {{ d.params.status !== 2 ? 'checked' : '' }}>
+              <input type="radio" name="status" value="2" title="禁用" {{ d.params.status === 2 ? 'checked' : '' }}>
+          </script>
+        </div>
+    </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">选择部门</label>
+      <script type="text/html" template lay-url="/department/select" lay-done="layui.data.done(d);">
+          <div class="layui-input-block">
+              <div class="layui-unselect layui-form-select downpanel">
+                  <div class="layui-select-title">
+                      <span class="layui-input layui-unselect" id="treeDepartmentSelectId">{{ d.params.department_name || '' }}</span>
+                      <input type="hidden" name="department_id" value="{{ d.params.department_id || 0 }}">
+                      <i class="layui-edge"></i>
+                  </div>
+                  <dl class="layui-anim layui-anim-upbit">
+                      <dd>
+                          <ul id="treeDepartmentSelectList"></ul>
+                      </dd>
+                  </dl>
+              </div>
+          </div>
+      </script>
+  </div>
+  <div class="layui-form-item" pane>
+    <label class="layui-form-label">选择岗位</label>
+        <script type="text/html" template lay-done="xmParams = d.params;">
+            <input type="hidden" name="id" value="{{ d.params.id || '' }}"  class="layui-input">
+        </script>
+        <div class="layui-input-block" id="jobsTreeSelect"></div>
+  </div>
+  <div class="layui-form-item" pane>
+    <label class="layui-form-label">绑定角色权限</label>
+        <div class="layui-input-block" id="rolesTreeSelect"></div>
+  </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block buttonCenter">
+            <button class="layui-btn" lay-submit lay-filter="LAY-permission-users-submit">立即提交</button>
+        </div>
+    </div>
+</div>
+
+<script>
+  layui.data.done = function(d){
+    layui.use(['admin','tree'], function(){
+      var $ = layui.$,
+        tree = layui.tree;
+      var selectData = d.data;
+      tree.render({
+        elem: "#treeDepartmentSelectList"
+        ,data: selectData //数据源
+        ,id: 'id' //定义索引
+        ,click: function (node) {
+          var $select = $($(this)[0].elem).parents(".layui-form-select");
+          $select.removeClass("layui-form-selected").find(".layui-select-title span").html(node.data.title).end().find("input:hidden[name='department_id']").val(node.data.id);
+        }
+      });
+
+      $(".downpanel").on("click", ".layui-select-title", function (e) {
+        $(".layui-form-select").not($(this).parents(".layui-form-select")).removeClass("layui-form-selected");
+        $(this).parents(".downpanel").toggleClass("layui-form-selected");
+        layui.stope(e);
+      }).on("click", "dl i", function (e) {
+        layui.stope(e);
+      });
+      $(document).on("click", function (e) {
+        $(".layui-form-select").removeClass("layui-form-selected");
+      });
+    });
+  };
+layui.use(['admin', 'form','xmSelect'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,form = layui.form
+  ,xmSelect = layui.xmSelect;
+  var xmRole = xmSelect.render({
+    el: '#rolesTreeSelect',
+    name: 'roles',
+    filterable: true,
+    autoRow: true,
+    theme: {
+      color: '#5EABE1',
+    },
+    layVerify: 'required',
+    layVerType: 'msg',
+    tips:'请选择角色',
+    template({ item, sels, name, value }){
+      return item.role_name  + '<span style="position: absolute; right: 10px; color: #8799a3">'+value+'</span>'
+    },
+    prop: {
+      name: 'role_name',
+      value: 'id',
+    },
+    model: {
+      label: {
+        type: 'block',
+        block: {
+          //最大显示数量, 0:不限制
+          showCount: 20,
+          //是否显示删除图标
+          showIcon: true,
+        }
+      }
+    },
+    data: [],
+  });
+
+  admin.req({
+    url: '/role/select'
+    ,type: 'get'
+    ,done: function(res){
+      xmRole.update({
+        data: res.data,
+        autoRow: true,
+      });
+      if(!$.isEmptyObject(xmParams)){
+        xmRole.setValue(xmParams.roles.split(','),false)
+      }
+    }
+  });
+
+  var xmJob = xmSelect.render({
+    el: '#jobsTreeSelect',
+    name: 'jobs',
+    filterable: true,
+    autoRow: true,
+    theme: {
+      color: '#5EABE1',
+    },
+    layVerify: 'required',
+    layVerType: 'msg',
+    tips:'请选择岗位',
+    template({ item, sels, name, value }){
+      return item.job_name  + '<span style="position: absolute; right: 10px; color: #8799a3">'+value+'</span>'
+    },
+    prop: {
+      name: 'job_name',
+      value: 'id',
+    },
+    model: {
+      label: {
+        type: 'block',
+        block: {
+          //最大显示数量, 0:不限制
+          showCount: 20,
+          //是否显示删除图标
+          showIcon: true,
+        }
+      }
+    },
+    data: [],
+  });
+
+  admin.req({
+    url: '/job/select'
+    ,type: 'get'
+    ,done: function(res){
+      xmJob.update({
+        data: res.data,
+        autoRow: true,
+      });
+      if(!$.isEmptyObject(xmParams) && xmParams.jobs.length > 0){
+        xmJob.setValue(xmParams.jobs.map(x => x['job_id']),false)
+      }
+    }
+  });
+});
+</script>

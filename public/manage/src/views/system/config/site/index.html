@@ -1,0 +1,117 @@
+<title>网站设置</title>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">网站设置</div>
+                <div class="layui-card-body">
+                    <script type="text/html" template lay-url="/config/group?group=site" lay-done="layui.data.done(d);">
+                        <div class="layui-form" wid100="" lay-filter="">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">系统名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="id[{{ d.data.site_name.id }}]" value="{{ d.data.site_name.value || '' }}" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">Logo</label>
+                                <div class="layui-input-block">
+                                    <div class="layui-upload">
+                                        <button type="button" class="layui-btn" id="logo-upload">上传图片</button>
+                                        <div class="layui-upload-list">
+                                            <img class="layui-upload-img" id="logo-upload-img">
+                                            <p id="logo-upload-text"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">META关键词</label>
+                                <div class="layui-input-block">
+                                    <textarea name="id[{{ d.data.keywords.id }}]" class="layui-textarea" placeholder="多个关键词用英文状态 , 号分割">{{ d.data.keywords.value || '' }}</textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">META描述</label>
+                                <div class="layui-input-block">
+                                    <textarea name="id[{{ d.data.description.id }}]" class="layui-textarea">{{ d.data.description.value || '' }}</textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">版权信息</label>
+                                <div class="layui-input-block">
+                                    <textarea name="id[{{ d.data.copyright.id }}]" class="layui-textarea">{{ d.data.copyright.value || '' }}</textarea>
+                                </div>
+                            </div>
+                            <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">-->
+                                <!--<legend>其他配置</legend>-->
+                            <!--</fieldset>-->
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit="" lay-filter="set_website">确认保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+</style>
+<script>
+  layui.data.done = function(d){
+    layui.use(['admin', 'form','upload'], function() {
+      var $ = layui.jquery
+        , form = layui.form
+        , admin = layui.admin
+        , upload = layui.upload;
+
+      //监听提交
+      form.on('submit(set_website)', function(data){
+        var field = data.field; //获取提交的字段
+        //提交 Ajax 成功后，关闭当前弹层并重载表格
+        admin.req({
+          url: '/config/update_batch'
+          ,type: 'post'
+          ,data: field
+          ,done: function(res){
+            layer.msg(res.msg);
+          }
+        });
+        layer.close(index); //执行关闭
+      });
+
+      //普通图片上传
+      var uploadInst = upload.render({
+        elem: '#logo-upload'
+        , url: '/upload/img'
+        , headers: {Authorization: layui.data(layui.setter.tableName).Authorization}
+        , before: function (obj) {
+          //预读本地文件示例，不支持ie8
+          obj.preview(function (index, file, result) {
+            $('#logo-upload-img').attr('src', result); //图片链接（base64）
+          });
+        }
+        , done: function (res) {
+          //如果上传失败
+          if (res.code > 0) {
+            return layer.msg('上传失败');
+          }
+          //上传成功
+        }
+        , error: function () {
+          //演示失败状态，并实现重传
+          var demoText = $('#logo-upload-text');
+          demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+          demoText.find('.demo-reload').on('click', function () {
+            uploadInst.upload();
+          });
+        }
+      });
+    });
+  };
+</script>

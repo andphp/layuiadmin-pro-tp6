@@ -1,0 +1,190 @@
+
+
+<div class="layui-form layui-form-pane" lay-filter="permission-menus-add-or-edit">
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜单名称</label>
+        <div class="layui-input-block">
+            <script type="text/html" template>
+                <input type="text" name="title" value="{{ d.params.title || '' }}" placeholder="请输入菜单" autocomplete="off" class="layui-input" lay-verify="required" lay-reqText="菜单名称 必填！">
+            </script>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜单(英文)名称</label>
+        <div class="layui-input-block">
+            <script type="text/html" template>
+                <input type="text" name="name" value="{{ d.params.name || '' }}" placeholder="请输入菜单名称" autocomplete="off" class="layui-input" lay-verify="required" lay-reqText="菜单(英文)名称 必填！">
+            </script>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">父级菜单</label>
+        <script type="text/html" template lay-url="/menu/select" lay-done="layui.data.done(d);">
+            <div class="layui-input-block">
+                <div class="layui-unselect layui-form-select downpanel">
+                    <div class="layui-select-title">
+                        <span class="layui-input layui-unselect" id="treeMenuSelectId">{{ d.params.parent && d.params.parent.title || '主菜单' }}</span>
+                        <input type="hidden" name="parent_id" value="{{ d.params.parent_id || 0 }}">
+                        <i class="layui-edge"></i>
+                    </div>
+                    <dl class="layui-anim layui-anim-upbit">
+                        <dd>
+                            <ul id="treeMenuSelectList"></ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </script>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜单图标</label>
+        <div class="layui-input-inline" style="width: 290px;">
+            <script type="text/html" template>
+                <input type="text" name="icon" value="{{ d.params.icon || '' }}" placeholder="请输入菜单图标" autocomplete="off" class="layui-input">
+            </script>
+        </div>
+        <a href="https://www.layui.com/doc/element/icon.html" target="_blank"><button class="layui-btn layui-btn-warm" style="padding: 0 13px;">点击查询图标</button></a>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序</label>
+        <div class="layui-input-block">
+            <script type="text/html" template>
+                <input type="number" name="sort" value="{{ d.params.sort || 0 }}"  autocomplete="off" class="layui-input">
+            </script>
+        </div>
+    </div>
+    <div class="layui-form-item" pane>
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block" id="IsRadioType">
+            <script type="text/html" template>
+                <input type="radio" name="type" value="1" title="菜单【主导航】" lay-filter="radioType" lay-verify="radioRequired" {{ d.params.type === 1 ? 'checked' : '' }}>
+                <input type="radio" name="type" value="2" title="按钮【权限】" lay-filter="radioType" lay-verify="radioRequired" {{ d.params.type === 2 ? 'checked' : '' }}>
+                <input type="radio" name="type" value="3" title="外链" lay-filter="radioType" lay-verify="radioRequired" {{ d.params.type === 3 ? 'checked' : '' }}>
+            </script>
+        </div>
+    </div>
+    <!-- layui 动态模版 -->
+    <script type="text/html" template>
+        <input type="hidden" name="id" value="{{ d.params.id || '' }}"  autocomplete="off" class="layui-input">
+        <div class="layui-form-item radio-type-3" {{ (d.params.type === 1 || d.params.type === 3)?'style="display:block;"':'style="display:none;"' }} >
+            <label class="layui-form-label">指定页面/外链</label>
+            <div class="layui-input-block">
+                <input type="text" name="jump" value="{{ d.params.jump || '' }}" placeholder="请输入菜单指定页面或外链" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item radio-type-1" pane {{ d.params.type !== 1?'style="display:none;"':'style="display:block;"' }} >
+            <label class="layui-form-label">默认是否展子菜单</label>
+            <div class="layui-input-block">
+                   <input type="radio" name="spread" value="1" title="是" {{ d.params.spread === true ? 'checked' : '' }}>
+                   <input type="radio" name="spread" value="2" title="否" {{ d.params.spread === false ? 'checked' : '' }}>
+            </div>
+        </div>
+        <div class="layui-form-item radio-type-1" pane {{ d.params.type !== 1?'style="display:none;"':'style="display:block;"' }} >
+            <label class="layui-form-label">主菜单是否隐藏</label>
+            <div class="layui-input-block">
+                    <input type="radio" name="hidden" value="1" title="是" {{ d.params.hidden === 1 ? 'checked' : '' }}>
+                    <input type="radio" name="hidden" value="2" title="否" {{ d.params.hidden === 2 ? 'checked' : '' }}>
+            </div>
+        </div>
+
+        <div class="layui-form-item radio-type-2" {{ d.params.type !== 2?'style="display:none;"':'style="display:block;"' }} >
+            <label class="layui-form-label">权限标识</label>
+            <div class="layui-input-block">
+                    <input type="text" name="permission_mark" value="{{ d.params.permission_mark || '' }}" placeholder="请输入权限标识" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item radio-type-2" pane {{ d.params.type !== 2?'style="display:none;"':'style="display:block;"' }} >
+            <label class="layui-form-label">全局权限</label>
+            <div class="layui-input-block">
+                <input type="radio" name="permission_adopt" value="1" title="是" {{ d.params.permission_adopt === 1 ? 'checked' : '' }}>
+                <input type="radio" name="permission_adopt" value="2" title="否" {{ d.params.permission_adopt === 2 ? 'checked' : '' }}>
+            </div>
+        </div>
+    </script>
+    <!-- layui 动态模版 end -->
+    <div class="layui-form-item">
+        <div class="layui-input-block buttonCenter">
+            <button class="layui-btn" lay-submit lay-filter="LAY-permission-menus-submit">立即提交</button>
+        </div>
+    </div>
+</div>
+
+<script>
+  layui.data.done = function(d){
+    layui.use(['admin','tree'], function(){
+      var $ = layui.$,
+        tree = layui.tree;
+      var selectData = d.data;
+      selectData.unshift({'id':0,'title':'主菜单'});
+      tree.render({
+        elem: "#treeMenuSelectList"
+        ,data: selectData //数据源
+        ,id: 'id' //定义索引
+        ,click: function (node) {
+          var $select = $($(this)[0].elem).parents(".layui-form-select");
+          $select.removeClass("layui-form-selected").find(".layui-select-title span").html(node.data.title).end().find("input:hidden[name='parent_id']").val(node.data.id);
+        }
+      });
+
+      $(".downpanel").on("click", ".layui-select-title", function (e) {
+        $(".layui-form-select").not($(this).parents(".layui-form-select")).removeClass("layui-form-selected");
+        $(this).parents(".downpanel").toggleClass("layui-form-selected");
+        layui.stope(e);
+      }).on("click", "dl i", function (e) {
+        layui.stope(e);
+      });
+      $(document).on("click", function (e) {
+        $(".layui-form-select").removeClass("layui-form-selected");
+      });
+    });
+  };
+  layui.use(['admin', 'form'], function(){
+    var $ = layui.$
+      ,form = layui.form;
+
+    form.on('radio(radioType)', function (data) {
+      switch(data.value){
+        case '1':
+          $(".radio-type-1").show();
+          $(".radio-type-2").hide();
+          $(".radio-type-3").show();
+          break;
+        case '2':
+          $(".radio-type-2").show();
+          $(".radio-type-1").hide();
+          $(".radio-type-3").hide();
+          break;
+        case '3':
+          $(".radio-type-3").show();
+          $(".radio-type-1").hide();
+          $(".radio-type-2").hide();
+          break;
+      };
+      form.render();
+    });
+
+    // 验证 类型 是否选择
+    form.verify({
+      radioRequired: function(value,item){
+        var $ = layui.$;
+        var verifyName=$(item).attr('name')
+          , verifyType=$(item).attr('type')
+          ,formElem=$(item).parents('.layui-form')//获取当前所在的form元素，如果存在的话
+          ,verifyElem=formElem.find('input[name='+verifyName+']')//获取需要校验的元素
+          ,isTrue= verifyElem.is(':checked')//是否命中校验
+          ,focusElem = verifyElem.next().find('i.layui-icon');//焦点元素
+        if(!isTrue || !value){
+          //定位焦点
+          focusElem.css(verifyType=='radio'?{"color":"#FF5722"}:{"border-color":"#FF5722"});
+          //对非输入框设置焦点
+          focusElem.first().attr("tabIndex","1").css("outline","0").blur(function() {
+            focusElem.css(verifyType=='radio'?{"color":""}:{"border-color":""});
+          }).focus();
+          return '请选择类型！';
+        }
+      }
+    });
+  });
+</script>
+

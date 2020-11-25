@@ -1,0 +1,59 @@
+<div class="layui-form layui-form-pane" lay-filter="configs-add-or-edit">
+  <div class="layui-form-item">
+    <label class="layui-form-label">配置标签</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="tag" value="{{ d.params.tag || '' }}" placeholder="请输入配置标签" autocomplete="off" class="layui-input" lay-verify="required" lay-reqText="配置标签 必填！">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">分组</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="group" value="{{ d.params.group || '' }}" placeholder="请输入分组" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">key</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="name" value="{{ d.params.name || '' }}" placeholder="请输入键名" autocomplete="off" class="layui-input" lay-verify="required" lay-reqText="配置键名 必填！">
+      </script>
+    </div>
+  </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">value</label>
+        <div class="layui-input-block">
+            <script type="text/html" template>
+                <input type="text" name="value" value="{{ d.params.value || '' }}" placeholder="请输入键值" autocomplete="off" class="layui-input">
+            </script>
+        </div>
+    </div>
+  <div class="layui-form-item" pane>
+    <label class="layui-form-label">描述/备注</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <textarea type="text" name="description" autocomplete="off" class="layui-textarea">{{ d.params.description || '' }}</textarea>
+      </script>
+    </div>
+  </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block buttonCenter">
+            <button class="layui-btn" lay-submit lay-filter="LAY-configs-submit">立即提交</button>
+        </div>
+    </div>
+    <script type="text/html" template lay-done="xmParams = d.params;">
+        <input type="hidden" name="id" value="{{ d.params.id || '' }}"  class="layui-input">
+    </script>
+</div>
+
+<script>
+layui.use(['admin', 'form'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,form = layui.form;
+
+});
+</script>

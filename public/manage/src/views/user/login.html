@@ -1,0 +1,173 @@
+
+<script type="text/html" template>
+  <link rel="stylesheet" href="{{ layui.setter.base }}style/login.css?v={{ layui.admin.v }}-1" media="all">
+</script>
+
+<!--[if lt IE 10]>
+<p style="text-align: center;padding-top:100px;">请使用高版本浏览器进入后台管理（建议浏览器：Firefox、Chrome）</p>
+<p><a href="http://www.firefox.com.cn/">下载Firefox浏览器</a></p>
+<p><a href="http://www.google.cn/chrome/browser//">下载Chrome浏览器</a></p>
+<div style="display:none">
+<![endif]-->
+
+<div class="container and">
+  <div class="content">
+    <div id="large-header" class="large-header">
+      <canvas id="demo-canvas"></canvas>
+      <div id="login" class="layui-form">
+          <script type="text/html" template>
+        <h1>
+            <strong><span class="en-font">{{ layui.setter.name || 'AndPHP' }}</span> 管理系统</strong>
+          <em class="en-font">{{ layui.setter.projectName || 'AndPHP' }} Management System</em>
+        </h1>
+          </script>
+        <div class="user info">
+            <label for="LAY-user-login-username">U</label>
+            <input type="text" name="username" value="admin" id="LAY-user-login-username" class="en-font" lay-verify="required|nickname" placeholder="账号" autocomplete="off">
+        </div>
+        <div class="pwd info">
+            <label for="LAY-user-login-password">P</label>
+            <input type="password" name="password" value="admin" id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="en-font" autocomplete="off">
+        </div>
+        <div class="code info">
+          <label for="LAY-user-login-vercode">V</label>
+          <input type="text" name="captcha" value="" id="LAY-user-login-vercode" class="en-font" autocomplete="off"
+                 placeholder="验证码">
+          <span class="vimg"><img src="/captcha.html" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode"/></span>
+        </div>
+        <!--<div class="__token__">-->
+          <!--<input type="hidden" name="__token__" value="{$Request.token}" id="__token__">-->
+        <!--</div>-->
+        <div class="sub">
+          <input type="submit" id="loginSubmit" lay-submit lay-filter="LAY-user-login-submit" value="立即登录"/>
+        </div>
+
+        <div class="copy">
+            <script type="text/html" template>
+                <p>© {{ layui.setter.copyright || '2018 - 2022' }} <a href="javascript:;" style="color:white; font-size:12px;" target="_blank">{{ layui.setter.inc || layui.setter.serverName }}</a> All Rights Reserved.</p>
+                <span><a href="{{ layui.setter.companyLink }}" target="_blank">{{ layui.setter.company }}</a></span>
+                <span><a href="http://www.miitbeian.gov.cn/" target="_blank">{{ layui.setter.icp }}</a></span>
+            </script>
+          <p>
+            <span><a href="http://www.layui.com/admin/#get" target="_blank">获取授权</a></span>
+            <span><a href="http://www.layui.com/admin/pro/" target="_blank">在线演示</a></span>
+            <span><a href="http://www.layui.com/admin/" target="_blank">前往官网</a></span>
+          </p>
+        </div>
+      </div>
+      <div class="auth">
+        <div class="loading">
+          <div class="loader-inner ball-clip-rotate-multiple"></div>
+        </div>
+        <p>验证中...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+layui.use(['admin', 'form', 'user','TweenLite',
+  'EasePack',
+  'Demo2'], function(){
+  var $ = layui.$
+  ,setter = layui.setter
+  ,admin = layui.admin
+  ,form = layui.form
+  ,router = layui.router()
+  ,search = router.search;
+
+  form.render();
+
+  $('#LAY-user-login-vercode').keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#loginSubmit").trigger("click");
+    }
+  });
+
+  $('#LAY-user-login-username').keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#LAY-user-login-password").focus();
+    }
+  });
+  $('#LAY-user-login-password').keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#LAY-user-login-vercode").focus();
+    }
+  });
+
+
+  //提交
+  form.on('submit(LAY-user-login-submit)', function(obj){
+
+    //登陆触发变形特效
+    $('#login').addClass('checking');
+    setTimeout(function () {
+      $('#login').animate({
+        'margin-left': -250
+      }, 200);
+      $('.auth').addClass('checking');
+    }, 500);
+
+
+    //请求登入接口
+    $.ajax({
+      url: '/login' //实际使用请改成服务端真实接口
+      ,data: obj.field
+      ,success: function(res){
+      
+
+        if(res.code > 0){
+          //登入成功的提示与跳转
+          layer.msg(res.msg, {
+            offset: '15px'
+            ,icon: 2
+            ,time: 3000
+          }, function(){
+            $('.auth').removeClass('checking');
+            setTimeout(function () {
+              $('#login').removeClass('checking');
+              $('#login').animate({
+                'margin-left': -180
+              }, 200);
+              $("#LAY-user-get-vercode").attr('src','/captcha?t='+ new Date().getTime());
+              $("#LAY-user-login-vercode").val('');
+              $("#LAY-user-login-vercode").focus();
+            }, 250);
+          });
+          return false;
+        }
+
+        //请求成功后，写入 access_token
+        layui.data(setter.tableName, {
+          key: setter.request.tokenName
+          ,value: 'Bearer '+res.data.access_token
+        });
+        //登入成功的提示与跳转
+        layer.msg('登入成功', {
+          offset: '15px'
+          ,icon: 1
+          ,time: 5000
+        }, function(){
+          $('.auth').removeClass('checking');
+          setTimeout(function () {
+            $('#login').removeClass('checking');
+            $('#login').animate({
+              'margin-left': -180
+            }, 200);
+          }, 250);
+          location.hash = search.redirect ? decodeURIComponent(search.redirect) : '/';
+        });
+      },error: function () {
+        $('.auth').removeClass('checking');
+        setTimeout(function () {
+          $('#login').removeClass('checking');
+          $('#login').animate({
+            'margin-left': -180
+          }, 200);
+        }, 250);
+      }
+    });
+    
+  });
+});
+</script>

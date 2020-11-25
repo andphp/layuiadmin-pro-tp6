@@ -1,0 +1,403 @@
+@charset "utf-8";
+@media (max-width:1360px) {
+.bx-wrapper .bx-prev {left: -25px;}
+.bx-wrapper .bx-next {right: -25px;}
+}
+
+@media (max-width:1260px) {
+#slider2 {padding:0 60px}
+}
+
+@media (max-width:1180px) {
+.wrap,.wrap2 {padding:0 3%}
+body {font-size:12px; line-height:20px; }
+.bannerin { height:220px; background-size:cover;}
+
+.mobmenu {display:block;background:none;width:auto; height:auto; margin-top:auto}
+.mobmenu { position:absolute; z-index:9999;top:9px;right:3%;width:26px; height:21px;}
+.mobmenu .openmenu { background:url(../img/open2.png) no-repeat;width:26px; height:21px; cursor:pointer;}
+.mobmenu .closemenu { background:url(../img/open2.png) no-repeat;width:26px; height:21px; cursor:pointer; display:none}
+
+.toperh.active { background:#fff;}
+.topblank { height:40px}
+.toper { background:#fff;}
+.toper .tel { display:none;}
+.toper,.toperh.active { height:40px}
+.toper .logo,.toperh.active .logo {margin:10px 0 0 0;width:208px; height:20px; background-size:100%;}
+.toper ul {position:fixed; z-index:9999;left:0;width:100%;margin-left:0;top:20px;padding:0px 0;background:rgba(0,0,0,0.8); display:none; height:1500px}
+.toper ul li {display:block; text-align:center; margin:20px auto; height:30px; line-height:30px}
+.toper ul li i { display:none;}
+.toper ul li a {padding:0;margin:0;color:#fff;border:0;font-size:18px}
+.toper ul li:hover>dl { display:none}
+.toper li:hover>dl { display:none;}
+
+.toperh{transition-duration:0s;-ms-transition-duration:0s;-moz-transition-duration:0s; -webkit-transition-duration:0s;}
+.toperh .logo { background:url(../img/logo.png) no-repeat center;background-size:100%;}
+.toperh.active ul li a {color:#fff;}
+.toperh.active ul li i { display:none;}
+
+.toper.active2 { height:40px;}
+.toper.active2 .logo {margin-top:10px;}
+.toper.active2 ul {margin-top:20px}
+
+.tabPanel ul{height:auto; line-height:30px;margin:15px 0}
+.tabPanel ul li{ margin:-5px 10px;font-size:14px;border-top:2px solid transparent}
+.indprosubject {font-size:20px; line-height:30px;padding:30px 0 10px 0}
+.prolist .procons .up h1 {font-size:16px; line-height:25px}
+.prolist .procons .up h2 {font-size:12px;margin:3px 0 8px 0}
+.prolist .procons .up h3 { height:1px;}
+.prolist .procons:hover .up h3 {width:30px;}
+.prolist .procons .down { width:20px;height:20px;background-size:100%}
+
+.maincons {margin-top:30px}
+.casesubject h1 {font-size:20px; line-height:20px;}
+.casesubject h2 a {font-size:18px;}
+.casesubject h2 i {margin:0 10px;font-size:18px}
+.simplefilter li {margin-left:15px;margin-top:5px;height:20px;font-size:14px;border-width:1px}
+.caselist {padding:0 2.7%}
+.caseline {margin:15px 0 20px 0;}
+
+.caseshow .current {margin-top:-10px;padding:0 0 10px 0}
+.caseshow .title {font-size:20px; line-height:30px;margin:20px 0 20px 0}
+.caseshow .left {line-height:25px;}
+.caseshow .right {line-height:25px}
+.caseshow .cons {margin-top:20px}
+.caseshow .cons img {margin-top:10px}
+.caseshow .proline {margin:10px 0 0 0; height:50px;border:0}
+.caseshow .relax {font-size:20px;margin:20px 0}
+.rightprevnext { display:block; z-index:0;position:relative;margin:0px;top:auto;left:auto;width:auto;border-bottom:1px solid #dfdcdc;padding:0 0 10px 0}
+.rightprevnext a { display:inline-block;margin:0; vertical-align:top;}
+.rightprevnext .close {margin:20px 30px 0 30px; background-size:100%; height:18px;width:17px;display:inline-block;}
+.rightprevnext .next {margin:20px 0 0 0;background-size:100%; height:18px;width:10px;display:inline-block;margin-left:-10px}
+.rightprevnext .prev {margin:20px 0 0 0;background-size:100%; height:18px;width:10px;display:inline-block; position:absolute;left:0}
+.rightprevnext .bdsharebuttonbox {float:right; position:absolute; z-index:1;right:-20px;top:10px;}
+.rightprevnext .bdsharebuttonbox a.bds_more:hover { margin-left:-50px}
+
+.newsshow .current {margin-top:-30px}
+.newsshow .ncons { line-height:20px;padding:20px 0 0 0;}
+.newsshow .ncons img {margin:5px 0}
+.newsshow .titles {font-size:16px; line-height:25px;margin:30px 0;width:50%;}
+.newsshow .addtime {margin:35px 0 30px 0;width:45%}
+
+.contact .left {width:30%;}
+.contact .left .subject {font-size:20px; line-height:30px}
+.contact .left .cons {font-size:14px;margin:5px 0 10% 0; line-height:25px;}
+.contact .left .title {font-size:14px}
+.contact .left .tel {font-size:25px; letter-spacing:0}
+.contact .right {width:70%;}
+.contact .right .name {font-size:20px;margin:10px 0 20px 0}
+.contact .right .cons .title{font-size:18px;border-width:2px;line-height:30px;margin:0 0 10px 0}
+.message .title {font-size:18px;margin:35px 0 10px 0}
+.message .conss {margin:0 0 0 0}
+.message input[type="text"] {font-size:12px;height:30px; line-height:30px; padding:0 10px;}
+.message #cbeizu {height:80px;font-size:12px;padding:8px 10px; }
+.message #cbtn {border-width:1px; height:80px; line-height:80px;font-size:14px;}
+.contact ul {margin-top:30px;padding:10px 0 0 0}
+.contact li {padding:20px 0}
+.contact li .pic { height:80px;}
+.contact li .pic img {max-height:60px}
+.contact li.f1 .pic img {max-height:80px}
+.contact li .title {margin-top:10px}
+.namedw {top:-40px;}
+
+.foot { padding:20px 0;margin-top:30px;}
+.foot dl { display:none;}
+.foot dl.copy { display:block; text-align:center;float:none;width:100%}
+.foot dl.copy dt {margin:0 0 10px 0}
+.foot dl.copy dd .cons {margin:20px 0 0 0;}
+
+.about .aleft .subject {font-size:20px; line-height:25px}
+.about .aleft .cons {font-size:14px;margin:5px 0 15px 0}
+.aboutul { margin-top:30px}
+.aboutul li {padding:0 0 20px 0}
+.aboutul li .cons {border-width:2px;max-width:80%}
+.aboutul li .cons .title {font-size:18px; line-height:30px;margin:20px 0}
+.aboutul li .cons .content {font-size:14px;margin:20px 0}
+.aboutul li .cons .icon img {max-height:50px}
+
+.aboutcc {padding:40px 0;margin-top:30px;}
+.aboutcc .title {font-size:16px; line-height:25px;}
+.aboutcc .title strong{font-size:20px}
+.aboutcc .line { height:2px; width:50px;margin:20px auto}
+.aboutcc .cons {font-size:16px; line-height:25px}
+.aboutul2 { margin-top:30px}
+.aboutul2 li {padding:20px 0}
+.aboutul2 li .content {font-size:16px; line-height:25px;margin:0 0 20px 0}
+.aboutul2 li .icon img {max-height:50px}
+
+.team {margin-top:30px}
+.team .title {font-size:20px;padding:30px 0 10px 0}
+.team .cons {font-size:16px; line-height:25px;margin:0 auto 20px auto}
+.aboutfh .title { font-size:20px;padding:30px 0 20px 0}
+.aboutfh .cons { font-size:16px; line-height:25px;}
+.aboutul3 {margin:0px 0 20px 0}
+.aboutul3 li {border-width:1px;font-size:18px;padding:10px 10px }
+
+.indnews {margin-top:30px;}
+.indnews .left .f1 {font-size:20px}
+.indnews .left .f2 {margin:10px 0 15px 0}
+.indnews .left .f3 { height:2px; width:30px;}
+.indnews .left .f4 {font-size:20px; line-height:25px;margin:30px 0}
+.indnews .left .f5 { font-size:14px;padding:0 5px}
+.indnews .left .f7 {font-size:20px;;margin-top:10px}
+.indnews .right li {margin-bottom:20px}
+.indnews .right .addtime {font-size:18px;padding:10px 0 10px 0}
+.indnews .right .addtime p {font-size:30px; line-height:30px;}
+.indnews .right .addtime {width:18%;}
+.indnews .right .cons {width:78%;margin-left:4%;padding:0;border:0}
+.indnews .right .cons .title {margin-bottom:5px}
+.indnews .right .cons .title a {font-size:16px}
+.indnews .right .cons .content { line-height:20px; height:60px;}
+
+.indmain {margin:30px 0}
+.indmain .title {font-size:20px; line-height:25px;}
+.indmain .cons {font-size:16px; line-height:25px;margin-top:7px}
+.serviceul li {border-width:1px;padding:0 0 10px 0;}
+.serviceul li .left {width:40%;margin-left:5%;}
+.serviceul li .left .title { width:40px; height:49px;padding:11px 10px 0 10px;font-size:16px; line-height:20px;margin:-15px 0 30px 0}
+.serviceul li .right {width:50%;padding:30px 10px 0 0; min-height:220px;}
+
+.kfpj { padding:1px 0 50px 0;margin-top:30px}
+.kfpj .line { height:1px;margin-top:-23px;}
+#slider2 {padding:0}
+#slider2 .slide .cons .title {font-size:14px;}
+#slider2 .slide .cons .content { line-height:20px ; height:100px; margin:10px 0}
+#slider2 .slide .cons .star { width:71px; height:12px; background-size:100%}
+#slider2 .slide .pic img {width:40px; height:40px;border-width:2px;margin:20px auto 0 auto}
+.bx-wrapper .bx-controls-direction a { margin-top: 50px; }
+
+.indprogram li .cons .title {font-size:16px;margin:5px 0 15px 0}
+.indprogram li .cons .line { height:1px;width:20px;margin-top:-5px}
+.indprogram li.f1 .cons { line-height:18px;}
+.indprogram li.f1,.indprogram li.f4 { height:300px;}
+.indprogram li {height:147px;}
+.indprogram li.f3,.indprogram li.f6,.indprogram li.f8 {top:147px;}
+.indprogram li:hover .cons .content { line-height:20px;margin-top:5px}
+.indprogram li.f1 .cons .content { line-height:16px;margin-top:15px}
+
+.indsolution {margin-top:30px}
+
+.ind4 {padding:1px 0 30px 0}
+.home-subjects-v2{height:200px;}
+.home-subjects-v2 li{width:15%;height:200px;}
+.home-subjects-v2 li a{height:200px;padding:0 20px;}
+.home-subjects-v2 li .left .num {font-size:30px; line-height:30px;margin:35px 0 10px 0}
+.home-subjects-v2 li .left .title {font-size:20px; line-height:38px;}
+.home-subjects-v2 li .left .title2 { line-height:16px;margin:5px 0 12px 0}
+.home-subjects-v2 li .left .line {width:20px;}
+.home-subjects-v2 li .right .pic {width:48%; height:200px}
+.home-subjects-v2 li .right .pic img{max-height:200px}
+.home-subjects-v2 li .right .cons {width:45%;margin:0 0 0 7%; height:200px;}
+.home-subjects-v2 .big{width:55%;}
+.home-subjects-v2 .big .left{width:20%;}
+.home-subjects-v2 .big .right{width:80%}
+.home-subjects-v2 .big .left .num {font-size:40px; line-height:40px;margin:20px 0 10px 0}
+
+.solution {margin-top:-20px}
+.solution li .list {width:40%;}
+.solution li {padding:25px 0}
+.solution li .list .num {font-size:40px; line-height:40px;}
+.solution li .list .title {font-size:20px; line-height:30px;margin:10px 0 10px 0}
+.solution li .list .title span { margin-left:10px}
+.solution li .list .cons {font-size:14px; line-height:25px}
+.solution li .pic { width:55%;margin-left:5%}
+.solutiondesign .subject { padding:30px 0 20px 0}
+.solutiondesign .subject .title {font-size:18px; line-height:20px;}
+.solutiondesign .subject .cons {font-size:14px;  line-height:25px;margin-top:5px}
+.solutiondesign li {width:24.25%;margin:0 1% 0 0;}
+.solutiondesign li .cons {padding:10px;}
+.solutiondesign li .cons .title { margin:0 0 5px 0}
+.solutiondesign li .cons .title a {font-size:14px}
+.solutiondesign li .cons .content {line-height:20px; height:40px;}
+
+.tabPanel2 ul {width:32%;margin:30px 0}
+.tabPanel2 ul li .cons {border-width:1px; width:138px; height:138px;}
+.tabPanel2 ul li .cons .cons2 { margin:0 5% 0 10%;width:67%}
+.tabPanel2 ul li .cons .cons2 .title {font-size:14px; line-height:25px;}
+.tabPanel2 ul li .cons .cons2 .content {font-size:14px; line-height:20px;margin-top:1px}
+.tabPanel2 ul li .cons .icon { font-size:20px; width:10%;margin:0 8% 0 0; }
+.tabPanel2 ul li .num {width:140px; height:140px; line-height:140px;font-size:60px;}
+.panes2 {width:63%;margin-top:30px;}
+.qaservice {margin-top:-30px}
+.qaservice li .pic .list { left:10%; font-size:16px;}
+.qaservice li .cons {max-width:80%;margin:15px auto;min-height:180px}
+.msubject { padding:30px 0 20px 0}
+.msubject .title {font-size:18px; line-height:25px;}
+.msubject .cons {font-size:14px; line-height:25px;}
+
+.oneservice ul {height:400px;}
+.oneservice li {height:200px;padding:0px 15px 10px 15px}
+.oneservice li.f1 { height:400px;}
+.oneservice li .pic p {width:50px; height:50px; background-size:100%}
+.oneservice li .title {font-size:16px;margin-top:5px}
+.oneservice li .line { height:1px; width:20px;margin:10px 0}
+.oneservice li .cons { line-height:20px; height:60px;}
+.oneservice li.f1 .line {margin:15px auto}
+
+.otherservice li {padding:30px 2% 30px 2%}
+.otherservice li .pic img{ width:40px}
+.otherservice li .cons {padding:0 0 0 50px;margin-top:5px}
+.otherservice li .cons .title {font-size:18px;}
+.otherservice li .cons .content {margin-top:5px;}
+
+.servicestep { padding:0px 0 10px 0;margin-top:30px}
+.servicestep .msubject .cons {margin-top:0px}
+.servicebz ul {margin-top:0px}
+.fixright { display:none;}
+
+.case_list {padding:0 2.6%}
+.case_list li {width:24.2%;margin:0.4%;}
+
+.page_wrap {padding:30px 0 0 0px;}
+.pager a,.pager span.current,.pager span.disabled{width:25px; height:25px; line-height:25px;}
+
+#slider2 .bx-wrapper .bx-controls-direction a {margin-top:65px}
+.news {margin-top:0px}
+.news li{ padding:10px 0;min-height:85px}
+.news li .pic { width:85px; height:85px;}
+.news li .cons {padding:0 45px 0 95px}
+.news li .cons .title {margin-top:0px;}
+.news li .cons .title a {font-size:14px;}
+.news li .cons .content { line-height:20px; height:60px;margin-top:5px}
+.news li .addtime { width:35px;padding:37px 0 0 0;font-size:13px;}
+.news li .addtime p {font-size:14px;margin:0px 0 0 2px;}
+.news li:hover .pic {left:10px}
+.news li:hover .addtime {right:10px;}
+.news li:hover .cons {padding:0 55px 0 105px}
+
+
+}
+
+@media (max-width:1024px) {
+#slider2 {padding:0 8px}
+.tabPanel2 ul li .cons {height:113px;}
+.tabPanel2 ul li .num {height:115px; line-height:115px;}
+
+}
+
+@media (max-width:960px) {
+.tabPanel2 ul {width:42%;}
+.panes2 {width:53%;margin-top:7%}
+
+.qaservice li .cons {min-height:220px}
+.serviceul li {width:32.6666%;margin-right:1%;}
+
+}
+
+@media (max-width:768px) {
+.bannerin { height:160px;}
+.panes .pane dd {width:50%;}
+.filtr-item {width:49.4%;padding:0.3%}
+.newsshow .titles {width:100%;float:none;margin:20px 0 0 0}
+.newsshow .addtime {margin:5px 0 20px 0;width:100%;float:none; text-align:left;}
+.solutiondesign li {width:48%;margin:0 1% 2% 1%;}
+
+.tabPanel2 ul {width:35%;}
+.panes2 {width:60%;margin-top:10%}
+.tabPanel2 ul li .cons {width:113px;}
+.tabPanel2 ul li .num {width:115px;}
+
+.case_list {padding:0 2%}
+.case_list li {width:48%;margin:1%;}
+}
+
+@media (max-width:740px) {
+.home-subjects-v2 { height:auto; overflow:visible; background:#fff;}
+.home-subjects-v2 li {float:none;width:100%;border:0;}
+.home-subjects-v2 li .right{opacity:1;}
+.home-subjects-v2 .big{width:100%;}
+.home-subjects-v2 li {border-top:1px solid #454545;}
+.home-subjects-v2 .big .left,.home-subjects-v2 li .left{width:25%;}
+.home-subjects-v2 .big .right,.home-subjects-v2 li .right{width:75%}
+.tabPanel2 ul {width:40%;}
+.panes2 {width:55%;margin-top:10%}
+}
+
+
+@media (max-width:640px) {
+.bannerin { height:120px;}
+.panes .pane dd {width:100%;}
+.filtr-item {width:100%;padding:0 0 10px 0}
+.caselist {padding:0 3%}
+.caseshow .left {float:none;width:100%;}
+.caseshow .right {float:none;width:100%;margin-top:20px}
+.caseshow .prorelax li {float:none;width:100%;margin-right:0;margin-top:10px}
+
+.contact .left {float:none;width:100%;}
+.contact .right {float:none;width:100%;margin-top:30px}
+.contact .left .cons {margin:5px 0 10px 0;}
+.contact .right .cons {float:none;width:100%}
+.contact .right .cons2 {margin-left:0;margin-top:20px}
+.contact ul {padding-top:20px}
+.contact li {width:50%;margin:0 auto}
+.message #cname {width:100%;}
+.message #ctel {float:none;width:100%}
+.message #cbeizu {width:73%;}
+.message #cbtn {width:25%;}
+
+.about .aleft {float:none;width:100%;}
+.about .aright {float:none;width:100%;}
+.aboutul li {float:none;width:100%;margin-right:0;margin-top:20px}
+.aboutul2 {margin-top:0px}
+.aboutul2 li {float:none;width:100%;margin-right:0;margin-top:20px}
+.aboutul3 {margin-top:-10px}
+.aboutul3 li {float:none;width:100%;margin-right:0;margin-top:10px}
+
+.indnews .left {float:none;width:100%;}
+.indnews .right {float:none;width:100%;margin-top:30px}
+.serviceul li {float:none;width:100%;margin-right:0;margin-top:30px;padding:0 0 20px 0}
+.serviceul li .right {padding:30px 10px 0 0; min-height:auto;}
+#slider2 {padding:0 20px}
+#slider2 .slide .cons .content { height:auto;  overflow:visible}
+.bx-wrapper .bx-controls-direction a { margin-top: 40px; }
+.indprogram ul {overflow:visible}
+.solutiondesign li {width:100%;margin:0 0 20px 0;float:none}
+.solutiondesign li .cons .content { height:auto}
+.solution li .list {width:100%;float:none;}
+.solution li .pic { width:100%;margin-left:0%;margin-top:15px}
+.tabPanel2 ul {float:none;width:100%;margin:20px 0;}
+.tabPanel2 ul li .cons {width:50%; height:100px;}
+.tabPanel2 ul li .num {width:50%; height:100px; line-height:100px;}
+.panes2 {float:none;width:100%;margin:20px 0; text-align:center}
+.qaservice li { width:100%;margin:0}
+.qaservice li .cons {min-height:auto}
+.oneservice ul { height:auto;margin-top:-10px}
+.oneservice li {float:none;margin:10px auto;width:100%; height:auto;padding:15px 6% 20px 6%}
+.oneservice li.f1 { height:auto; text-align:left;}
+.oneservice li.f1 .line {margin:10px auto 10px 0}
+.oneservice li.f1 .pic p {margin:0 0 0 auto}
+.oneservice li .cons { height:auto}
+.otherservice ul {margin-top:-10px}
+.otherservice li {float:none;width:100%;margin:10px 0 0 0;padding:30px 6%}
+.case_list {padding:0 3%}
+.case_list li {width:100%;margin:5px 0;}
+#slider2 .bx-wrapper .bx-controls-direction a {margin-top:35px}
+
+.indprogram li {width:48%;margin:1%; height:250px;}
+.indprogram li.f7 {margin-right:1%}
+.indprogram li.f1,.indprogram li.f4 { height:250px}
+.indprogram li.f3,.indprogram li.f6,.indprogram li.f8 { position:relative; z-index:1;top:0;left:0;margin:1%}
+
+.indprogram li .cons .pic {margin:0 auto}
+.indprogram li .cons .title {margin:8px 0 20px 0}
+.indprogram li .cons .line { height:2px;margin:-5px auto 10px auto}
+.indprogram li:hover .cons .content { height:auto;line-height:20px;margin-top:0}
+.indprogram li.f1 {padding-bottom:0}
+.indprogram li.f1 .cons .content { line-height:16px;margin-top:0}
+.indprogram li.f1 .cons { line-height:20px;}
+.indprogram li.f1 .pic {margin-top:0}
+.indprogram li.f1:hover .cons .content {margin:0}
+.indprogram li.f1:hover .line {margin:-5px auto 10px auto}
+
+}
+
+@media (max-width:480px) {
+.bannerin { height:110px;}
+.indnews .right .addtime {font-size:14px;}
+.indnews .right .addtime {width:22%;}
+.indnews .right .cons {width:74%;}
+}
+
+@media (max-width:420px) {
+.bannerin { height:90px;}
+}

@@ -1,0 +1,134 @@
+<title>部门管理</title>
+
+<div class="layui-fluid">
+    <!--<blockquote class="layui-elem-quote">菜单管理</blockquote>-->
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <div class="layui-btn-container" style="display: inline-block;">
+                <div class="layui-btn-group">
+                    <button id="btnAdd" class="layui-btn layui-btn-sm layui-btn-primary permission-departments-btn" data-type="add">
+                        <i class="layui-icon">&#xe624;</i>新增
+                    </button>
+                    <button id="btnRefresh" class="layui-btn layui-btn-sm layui-btn-primary permission-departments-btn" data-type="refresh">
+                        <i class="layui-icon">&#xe669;</i>刷新
+                    </button>
+                </div>
+                <div class="layui-btn-group">
+                    <button id="btnExpandAll" class="layui-btn layui-btn-sm layui-btn-primary">
+                        <i class="layui-icon">&#xe668;</i>展开全部
+                    </button>
+                    <button id="btnFoldAll" class="layui-btn layui-btn-sm layui-btn-primary">
+                        <i class="layui-icon">&#xe66b;</i>折叠全部
+                    </button>
+                </div>
+            </div>
+            <div style="float:right;">
+                <input class="layui-input" id="edtSearch" value="" placeholder="输入关键字"
+                       style="display: inline-block;width: 140px;height: 30px;line-height: 30px;padding: 0 5px;margin-right: 5px;"/>
+                <div class="layui-btn-container" style="display: inline-block;">
+                    <button id="btnSearch" class="layui-btn layui-btn-sm layui-btn-primary">
+                        <i class="layui-icon">&#xe615;</i>搜索
+                    </button>
+                    <button id="btnClearSearch" class="layui-btn layui-btn-sm layui-btn-primary">
+                        <i class="layui-icon">&#x1006;</i>清除搜索
+                    </button>
+                </div>
+            </div>
+            <table id="LAY-permission-departments-table" lay-filter="LAY-permission-departments-table"></table>
+            <script type="text/html" id="statusTpl">
+                {{#  if(d.status === 1){ }}
+                <button class="layui-btn layui-btn-primary layui-btn-xs">正常</button>
+                {{#  } else { }}
+                <button class="layui-btn layui-btn-danger layui-btn-xs">禁用</button>
+                {{#  } }}
+            </script>
+            <script type="text/html" id="tree-table-departments">
+                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+                {{#  if(d.role == '超级管理员'){ }}
+                <a class="layui-btn layui-btn-disabled layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>
+                {{#  } else { }}
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+                {{#  } }}
+            </script>
+        </div>
+    </div>
+</div>
+
+<script>
+  layui.use('department', layui.factory('department')).use(['admin', 'department'], function(){
+    var $ = layui.$
+      ,admin = layui.admin
+      ,view = layui.view
+      ,insTb = layui.department
+      ,layer = layui.layer
+      ,form = layui.form;
+
+    //事件
+    var active = {
+      add: function(){
+        admin.popup({
+          title: '添加新部门'
+          ,area: ['600px', '680px']
+          ,id: 'LAY-popup-permission-departments-form'
+          ,success: function(layero, index){
+            view(this.id).render('system/permission/departments/add_or_edit').done(function(){
+              form.render(null, 'permission-departments-add-or-edit');
+
+              //监听提交
+              form.on('submit(LAY-permission-departments-submit)', function(data){
+                var field = data.field; //获取提交的字段
+                //提交 Ajax 成功后，关闭当前弹层并重载表格
+                admin.req({
+                  url: '/department/save'
+                  ,type: 'post'
+                  ,data: field
+                  ,done: function(res){ //这里要说明一下：done 是只有 response 的 code 正常才会执行。而 success 则是只要 http 为 200 就会执行
+                    layer.msg(res.msg);
+                    insTb.refresh();  // 刷新(异步模式)
+                  }
+                });
+                layer.close(index); //执行关闭
+              });
+            });
+          }
+        });
+      }
+    };
+    $('.layui-btn.permission-departments-btn').on('click', function(){
+      var type = $(this).data('type');
+      active[type] ? active[type].call(this) : '';
+    });
+
+    //刷新
+    $('#btnRefresh').click(function () {
+      insTb.refresh();
+    });
+
+    // 搜索
+    $('#btnSearch').click(function () {
+      var keywords = $('#edtSearch').val();
+      if (keywords) {
+        insTb.filterData(keywords);
+      } else {
+        insTb.clearFilter();
+      }
+    });
+
+    // 清除搜索
+    $('#btnClearSearch').click(function () {
+      $('#edtSearch').val('');
+      insTb.clearFilter();
+    });
+
+    // 全部展开
+    $('#btnExpandAll').click(function () {
+      insTb.expandAll();
+    });
+
+    // 全部折叠
+    $('#btnFoldAll').click(function () {
+      insTb.foldAll();
+    });
+
+  });
+</script>
