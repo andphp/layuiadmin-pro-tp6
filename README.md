@@ -1,5 +1,5 @@
 # layuiadmin-pro-tp6
-layuiadmin v1.4.0 pro + thinkphp6.0.4
+layuiadmin v1.4.0 pro（单页版） + thinkphp6.0.4
 
 ### 效果图
 ![登录页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/readme1.png?raw=true)
