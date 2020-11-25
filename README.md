@@ -2,7 +2,10 @@
 layuiadmin v1.4.0 pro + thinkphp6.0.4
 
 ### 效果图
-
+![登录页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame1.png?raw=true)
+![登录成功](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame2.png?raw=true)
+![欢迎页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame4.png?raw=true)
+![菜单权限页](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/redame3.png?raw=true)
 ### 下载
 
 ```
