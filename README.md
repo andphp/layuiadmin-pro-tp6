@@ -1,6 +1,11 @@
 # layuiadmin-pro-tp6
 layuiadmin v1.4.0 pro（单页版） + thinkphp6.0.4
 
+* layuiadmin 分享来源 https://www.52pojie.cn/thread-1281709-1-1.html
+![分享来源](https://github.com/andphp/layuiadmin-pro-tp6/blob/master/public/static/images/layuiadmin-from.png?raw=true)
+
+> layuiadmin v1.4.0 下载链接： https://pan.baidu.com/s/1HrONZBfNM0zu9_XjAGNrQQ 提取码： 8009
+
 ### 注：仅用于学习使用
 
 ### 效果图
